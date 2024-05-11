@@ -1,39 +1,80 @@
 # Telegram extra features
 
-At the time being those featuxes are not there!
-Docker image to run with app id/hash and text (+ optional .ogg file)
+At the time being there are few features not yet implemented on **Telegram**, neither on *Premium* subscription.
 
-If you have a NAS follow the procedure, you could also use another device or even the cloud (Azure ACI or AKS?)
-
-## How to use
-
-* my.telegram.org
-* API development tools
-* api_id & api_hash
+The goal of this repository is providing **containerized module** written in *Python* for having such features: you will need to run the container against your account on your *host* (e.g. NAS) or in the *cloud* (e.g. Azure, AWS, GCP).
 
 ## Extra features
 
-- [No voice policy](no-voice-policy/README.md)
-- [Notify only once for multiple messages](notify-once/README.md)
+- [No voice policy](no-voice-policy/README.md): auto replies to any personal voice message received asking to send a text instead
+- [Notify once fragmented text](notify-once/README.md): auto snoozes subsequent messages from the same sender within a certain time frame (e.g. 1 minute)
 
-## How to build
+## How to use
 
-Build:
+* *Get API ID & hash*, first time only
+* *Run the extra*, as a container
 
-`docker build -t telegram-extras-<extra-name> .`
+### Get API ID & hash
 
-Run interactively:
+* Go to https://my.telegram.org
+* *API development tools*
+* Create a new app to get **api_id** & **api_hash**
 
-`docker run -i -t telegram-extras-<extra-name>`
+### Run the extra
 
-Run with volume:
+Here below few examples in real scenarios.
 
-`docker run -d --name tgext -v /your/path/tgext-<extra-name>.session:/tgext-<extra-name>.session tgext-<extra-name>`
+#### Locally
 
-See: https://docs.docker.com/storage/volumes/
+* Pull the extra image
+  
+  `docker pull 24mu13/telegram-extras-<extra-name>`
+* Run interactively for setting up your account
+  ```
+  docker run -i -t \
+    --name telegram-extras-<extra-name> \
+    -e TG_API_ID=<your-id> \
+    -e TG_API_HASH=<your-hash> \
+    -v /your/path/telegram-extras-<extra-name>.session:/telegram-extras-<extra-name>.session \
+  telegram-extras-<extra-name>
+  ```
+* For running as a service
+  ```
+  docker run -d \
+    --name telegram-extras-<extra-name> \
+    --restart unless-stopped \
+    -e TG_API_ID=<your-id> \
+    -e TG_API_HASH=<your-hash> \
+    -v /your/path/telegram-extras-<extra-name>.session:/telegram-extras-<extra-name>.session \
+  telegram-extras-<extra-name>
+
+  ```
+
+#### NAS (Synology DSM 7)
+
+* Run locally as described above to get **session** file `telegram-extras-<extra-name>.session`
+* Create folder `/volume1/docker/telegram-extras/<extra-name>`
+* Place the session file on the created folder
+* Go to **Container Manager** app
+* Create new image from `24mu13/telegram-extras-<extra-name>`
+* Create new container `telegram-extras-<extra-name>`
+  * Enable *auto-restart*
+  * *Environment*:
+      * TG_API_ID=\<your-id\>
+      * TG_API_HASH=\<your-hash\>
+  * *Volume Settings*:
+    * `/docker/telegram-extras/<extra-name>/telegram-extras-<extra-name>.session` -> `/telegram-extras-<extra-name>.session`
+
+#### Cloud 
+
+TBD
 
 ## FAQ
 
-### Why you don't use bot?
+### Why don't you use bot?
 
-It's different, here we want to react in some extra way regardless the sender..
+Using [bot](https://core.telegram.org/bots) we can't achieve the same result: it works in fact as long you are texting to it, or when including it on a group. Instead, when using API, we could react with some extra functionality, regardless the sender.
+
+## References
+
+* [Telethon](https://github.com/LonamiWebs/Telethon): API Telegram client library for Python 3
