@@ -1,6 +1,6 @@
 # Notify once fragmented text
 
-Auto snoozes subsequent messages from the same sender within a certain time frame (e.g. 1 minute).
+Auto snoozes subsequent messages from the same sender within a certain time window (e.g. 1 minute).
 
 TBD
 
@@ -17,3 +17,7 @@ whenever a message comes you check if the sender_id is already in the cache
 1. Open group
 2. *Notifications*, click *Customize*
 3. *Smart Notifications*
+
+## References
+
+- [expiringdict](https://github.com/mailgun/expiringdict): dictionary with auto-expiring values for caching purposes.
