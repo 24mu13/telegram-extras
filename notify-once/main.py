@@ -30,21 +30,18 @@ def main():
     # connecting telegram
     client.start()
     
-    @client.on(events.NewMessage)
+    @client.on(events.NewMessage(incoming=True))
     async def _(event):
         
-        if event.is_private and not isinstance(event.media, MessageMediaDocument):
-            
-            msgs = cache.get(event.sender_id)
-            if msgs is None:
-                cache[event.sender_id] = 1
-                logger.debug(f'First message in the interval by ID {event.sender_id}.')
-            else:
-                #TODO mark as read
-                cache[event.sender_id] = msgs + 1
-                logger.debug(f'Message snoozed by ID {event.sender_id} because is the occurrence no. {msgs}.')
+        msgs = cache.get(event.sender_id)
+        if msgs is None:
+            cache[event.sender_id] = 1
+            logger.debug(f'First message in the interval by ID {event.sender_id}.')
+        else:
+            await event.message.mark_read();
+            cache[event.sender_id] = msgs + 1
+            logger.debug(f'Message snoozed by ID {event.sender_id} because is the occurrence no. {msgs}.')
 
-            time.sleep(1)  
     
     client.run_until_disconnected()
 
