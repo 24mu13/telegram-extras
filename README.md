@@ -18,7 +18,7 @@ The goal of this repository is providing **containerized module** written in *Py
 
 * Go to https://my.telegram.org
 * *API development tools*
-* Create a new app to get **api_id** & **api_hash**
+* Create a new *Telegram Extras* app to get **api_id** & **api_hash**
 
 ### Run the extra
 
