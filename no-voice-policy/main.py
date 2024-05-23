@@ -33,11 +33,10 @@ def main():
     # connecting telegram
     client.start()
     
-    @client.on(events.NewMessage)
+    @client.on(events.NewMessage(incoming=True))
     async def _(event):
         
         if event.is_private and isinstance(event.media, MessageMediaDocument) and event.media.voice:
-            # pause for 1 second to rate-limit automatic replies
             time.sleep(1)  
             await client.send_message(event.sender_id, message)
             logger.info(f'Message sent to ID {event.sender_id}.')
