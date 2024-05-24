@@ -11,7 +11,7 @@ This feature help you to avoid multiple annoying notifications for people writin
 `[10:00:20] all good?`
 
 Additionally, you could set the following environment variables:
-* **TIME_WINDOWS_SECONDS**, time window in seconds (by default, `60`)
+* **TIME_WINDOW_SECONDS**, time window in seconds (by default, `60`)
 
 
 Internally the feature is implemented with a kind of throttling mechanism based on **expiringdict** library.

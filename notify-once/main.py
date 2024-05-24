@@ -8,7 +8,7 @@ from expiringdict import ExpiringDict
 EXTRA_NAME = 'telegram-extras-notify-once'
 EXTRA_VAR_TG_API_ID = 'TG_API_ID'
 EXTRA_VAR_TG_API_HASH = 'TG_API_HASH'
-EXTRA_VAR_TIME_WINDOW = 'TIME_WINDOWS_SECONDS'
+EXTRA_VAR_TIME_WINDOW = 'TIME_WINDOW_SECONDS'
 
 # basic logging
 logging.basicConfig(level=logging.DEBUG)
