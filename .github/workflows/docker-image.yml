@@ -28,4 +28,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build Docker
-      run: docker build no-voice-policy --file ${{ matrix.extra }}/Dockerfile --tag arisedream/telegram-extras-${{ matrix.extra }}:$(date +%s)
+      run: docker build ${{ matrix.extra }} --file ${{ matrix.extra }}/Dockerfile --tag arisedream/telegram-extras-${{ matrix.extra }}:$(date +%s)
