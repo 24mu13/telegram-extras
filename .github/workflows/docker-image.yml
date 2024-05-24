@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - id: set-extras
-      run: echo "::set-output name=extra::$(ls -d */ | jq -R -s -c 'split("\n")[:-1]')"    
+      run: echo "::set-output name=extra::$(ls -d */ | cut -f1 -d'/' | jq -R -s -c 'split("\n")[:-1]')"    
 
   build:
     runs-on: ubuntu-latest
