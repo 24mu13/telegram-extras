@@ -11,7 +11,7 @@ jobs:
   list-extras:
     runs-on: ubuntu-latest
     outputs:
-      extra: ${{ steps.set-extras.outputs.extra }   
+      extra: ${{ steps.set-extras.outputs.extra }}
     
     steps:
     - uses: actions/checkout@v4
