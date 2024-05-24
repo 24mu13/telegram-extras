@@ -1,5 +1,7 @@
 # Telegram extra features
 
+<img src="logo_plus.png" alt="logo" width="64"/>
+
 At the time being there are few features not yet implemented on **Telegram**, neither on *Premium* subscription.
 
 The goal of this repository is providing **containerized module** written in *Python* for having such features: you will need to run the container against your account on your *host* (e.g. NAS) or in the *cloud* (e.g. Azure, AWS, GCP).
