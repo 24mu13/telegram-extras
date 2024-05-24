@@ -16,4 +16,4 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Build no voice policy
-      run: docker build ./no-voice-policy --file Dockerfile --tag arisedream/telegram-extras-no-voice-policy:$(date +%s)
+      run: docker build no-voice-policy --file no-voice-policy/Dockerfile --tag arisedream/telegram-extras-no-voice-policy:$(date +%s)
