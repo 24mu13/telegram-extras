@@ -8,8 +8,8 @@ The goal of this repository is providing **containerized module** written in *Py
 
 ## Extra features
 
-- [No voice policy](no-voice-policy/README.md): auto replies to any personal voice message received asking to send a text instead
-- [Notify once fragmented text](notify-once/README.md): auto snoozes subsequent messages from the same sender within a certain time frame (e.g. 1 minute)
+- [No voice policy](no-voice-policy/README.md): automatically replies to any private voice message asking the effort to write a text message instead.
+- [Notify once fragmented text](notify-once/README.md): auto snoozes subsequent messages from the same sender within a certain time window (e.g. 1 minute)
 
 ## How to use
 

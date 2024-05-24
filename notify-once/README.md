@@ -2,13 +2,19 @@
 
 Auto snoozes subsequent messages from the same sender within a certain time window (e.g. 1 minute).
 
-TBD
+This feature help you to avoid multiple annoying notifications for people writing fragmented text. In the following example, instead of receiving three notifications you will receive only the first one.
 
-The general idea is to use a generic throttle mechanism.
-Memory cache with items expiring after x sec
-whenever a message comes you check if the sender_id is already in the cache
--> if yes, update the timestamp to now -> DO NOT NOTIFY (mark it as read?)
--> if no, add it with timestamp -> NOTIFY (do nothing?)
+`[10:00:00] hey`
+
+`[10:00:10] how are you?`
+
+`[10:00:20] all good?`
+
+Additionally, you could set the following environment variables:
+* **TIME_WINDOWS_SECONDS**, time window in seconds (by default, `60`)
+
+
+Internally the feature is implemented with a kind of throttling mechanism based on **expiringdict** library.
 
 ## Closest feature
 

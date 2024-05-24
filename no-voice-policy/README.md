@@ -1,6 +1,8 @@
 # No voice policy 
 
-Discourage voice messages not just denying them, but sending back a text and/or a voice message asking the effort to write a text instead.
+Automatically replies to any private voice message asking the effort to write a text message instead.
+
+![Screenshot in Italian](screenshot.png)
 
 ## How to use
 
@@ -20,10 +22,3 @@ Additionally, you could set the following environment variables:
 2. *Privacy and Security*
 3. Privacy, *Voice Messages*
 4. *Nobody* or *My Contacts*
-
-## References
-
-* [telegram-auto-reply](https://github.com/ibrdrahim/telegram-auto-reply/blob/master/main.py)
-* [Telegram-auto-reply](https://github.com/jpsecundino/Telegram-auto-reply/blob/master/autore.py)
-* https://leihao0.github.io/How-to-auto-reply-send-msg-with-telegram/
-
