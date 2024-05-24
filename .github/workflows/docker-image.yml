@@ -23,8 +23,8 @@ jobs:
     needs: list-extras
     strategy:
         matrix:
-            file: ${{ fromJson(needs.list-extras.outputs.extra) }}
+            extra: ${{ fromJson(needs.list-extras.outputs.extra) }}
 
     steps:
-    - name: Build no voice policy
-      run: docker build no-voice-policy --file ${{ matrix.file }}Dockerfile --tag arisedream/telegram-extras-${{ matrix.file }}:$(date +%s)
+    - name: Build Docker
+      run: docker build no-voice-policy --file ${{ matrix.extra }}/Dockerfile --tag arisedream/telegram-extras-${{ matrix.extra }}:$(date +%s)
