@@ -8,12 +8,23 @@ on:
 
 jobs:
 
-  build:
-
+  list-extras:
     runs-on: ubuntu-latest
-
+    outputs:
+      extra: ${{ steps.set-extras.outputs.extra }   
+    
     steps:
     - uses: actions/checkout@v4
-    
+    - id: set-extras
+      run: echo "::set-output name=extra::$(ls -d */ | jq -R -s -c 'split("\n")[:-1]')"    
+
+  build:
+    runs-on: ubuntu-latest
+    needs: list-extras
+    strategy:
+        matrix:
+            file: ${{ fromJson(needs.list-extras.outputs.extra) }}
+
+    steps:
     - name: Build no voice policy
-      run: docker build no-voice-policy --file no-voice-policy/Dockerfile --tag arisedream/telegram-extras-no-voice-policy:$(date +%s)
+      run: docker build no-voice-policy --file ${{ matrix.file }}Dockerfile --tag arisedream/telegram-extras-${{ matrix.file }}:$(date +%s)
