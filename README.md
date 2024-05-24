@@ -28,7 +28,7 @@ Here below few examples in real scenarios.
 
 * Pull the extra image
   
-  `docker pull 24mu13/telegram-extras-<extra-name>`
+  `docker pull arisedream/telegram-extras-<extra-name>`
 * Run interactively for setting up your account
   ```
   docker run -i -t \
@@ -56,7 +56,7 @@ Here below few examples in real scenarios.
 * Create folder `/volume1/docker/telegram-extras/<extra-name>`
 * Place the session file on the created folder
 * Go to **Container Manager** app
-* Create new image from `24mu13/telegram-extras-<extra-name>`
+* Create new image from `arisedream/telegram-extras-<extra-name>`
 * Create new container `telegram-extras-<extra-name>`
   * Enable *auto-restart*
   * *Environment*:
