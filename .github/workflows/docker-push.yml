@@ -7,6 +7,7 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: arisedream/telegram-extras-no-voice-policy
+  EXTRA: no-voice-policy
 
 jobs:
   push_to_registry:
@@ -31,19 +32,26 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ${{ env.IMAGE_NAME}}
+          images: ${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          context: ./no-voice-policy
-          file: ./no-voice-policy/Dockerfile
+          context: ./${{ env.EXTRA }}
+          file: ./${{ env.EXTRA }}/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       
-      
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ env.IMAGE_NAME }}
+          readme-filepath: ./${{ env.EXTRA }}/README.md
+
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
         with:
