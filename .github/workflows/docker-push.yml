@@ -16,7 +16,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-      attestations: write
+      #attestations: write
       packages: write
     steps:
       - name: Check out the repo
@@ -44,6 +44,13 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
         with:
@@ -51,10 +58,3 @@ jobs:
           password: ${{ secrets.DOCKER_USERNAME }}
           repository: ${{ env.IMAGE_NAME }}
           readme-filepath: ./${{ env.EXTRA }}/README.md
-
-      - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
-          subject-digest: ${{ steps.push.outputs.digest }}
-          push-to-registry: true
