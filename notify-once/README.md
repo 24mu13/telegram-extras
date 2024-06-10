@@ -13,8 +13,11 @@ This feature help you to avoid multiple annoying notifications for people writin
 Additionally, you could set the following environment variables:
 * **TIME_WINDOW_SECONDS**, time window in seconds (by default, `60`)
 
-
 Internally the feature is implemented with a kind of throttling mechanism based on **expiringdict** library.
+
+## Feature suggestion
+
+[Add TG Android's "Smart Notifications" feature to all Telegram notifications](https://bugs.telegram.org/c/1482)
 
 ## Closest feature
 
